@@ -1,0 +1,49 @@
+﻿<table class="table table-bordered">
+    <tr>
+        <th colspan="2" style="text-align:center">Асуулт асууж хариулсан байдал</th>
+        <td rowspan="3">
+
+            <script>
+                $(function () {
+                    var dataSource = [
+                     { country: "Хариулсан", asuult: @ViewBag.answered, },
+                     { country: "Асуусан", hariult: @ViewBag.asked, },
+                    ];
+
+                    $("#qaContainer").dxChart({
+                        dataSource: dataSource,
+                        rotated: true,
+                        commonSeriesSettings: {
+                            argumentField: "country",
+                            type: "stackedBar"
+                        },
+                        series: [
+                            { valueField: "asuult", name: "Асуулт" },
+                            { valueField: "hariult", name: "Хариулт" },
+                        ],
+                        legend: {
+                            verticalAlignment: "top",
+                            horizontalAlignment: "center",
+                            itemTextPosition: "right"
+                        },
+                        title: "Нийт асуулт болон хариулсан байдал",
+                        tooltip: {
+                            enabled: true,
+                            customizeText: function () {
+                                return this.percentText + " - " + this.valueText;
+                            }
+                        }
+                    });
+                }
+
+                );
+            </script>
+            <div id="qaContainer" class="case-container" style="width: 100%; height: 150px;"></div>
+        </td>
+    </tr>
+    <tr><th style="width:25%;">Нийт асуулт</th><th style="width:25%;">Нийт хариулт</th></tr>
+    <tr>
+        <td>@ViewBag.asked</td>
+        <td>@ViewBag.answered</td>
+    </tr>
+</table>

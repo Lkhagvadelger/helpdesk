@@ -1,0 +1,88 @@
+﻿@model IEnumerable<helpDesk.Entity.Organisation>
+@{
+    List<helpDesk.Entity.AspNetUser> users = ViewBag.orgUserList as List<helpDesk.Entity.AspNetUser>;
+}
+<h2>Newsonic админ</h2>
+<a href="/Admin/Register" class="btn btn-default btn-sm">Админ нэмэх</a>
+<br />
+<br />
+<table class="table">
+    <tr><th>Байгууллагын нэр</th><th>Хэрэглэгчид / Нэвтрэх эрх</th><th>Үйлдэл</th></tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.org_name</td>
+            <td>
+                @foreach (var subitem in users.Where(r => r.organisation == item.id))
+                {
+                    <table>
+                        <tr>
+                            <td style="width:150px;">@subitem.UserName</td>
+                            <td>@Html.Action("ShowRoles", new { userid = subitem.Id })</td>
+                            <td><a href="javascript:AddNewRole('@subitem.Id')"> Эрх </a></td>
+                        </tr>
+                        <tr><td> <br /></td><td></td></tr>
+                    </table>
+                }
+            </td>
+            <td></td>
+        </tr>
+    }
+</table>
+
+<div class="modal fade" id="roleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Төлөв солих</h4>
+            </div>
+            <div class="modal-body" id="roleEditor">
+
+            </div>
+            <div class="modal-footer small">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Гарах</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function AddNewRole(id) {
+        $("#roleModal").modal("show");
+        $("#followingBallsG").show();
+        $.ajax({
+            type: "POST",
+            url: "/Admin/RoleContainer",
+            cache: false,
+            data: { userid: id },
+            success: function (result) {
+                $("#roleEditor").html(result);
+            }
+        });
+        $("#followingBallsG").hide();
+    }
+    function RoleAdd(userid) {
+        var role = $("#roles").val();
+        $.ajax({
+            type: "POST",
+            url: "/Admin/RoleAdd",
+            cache: false,
+            data: { userid: userid, role: role },
+            success: function (result) {
+                $("#roleEditor").html(result);
+            }
+        });
+    }
+    function RoleRemove(userid) {
+        var role = $("#userCurrentRole").val();
+        $.ajax({
+            type: "POST",
+            url: "/Admin/RoleRemove",
+            cache: false,
+            data: { userid: userid, role: role },
+            success: function (result) {
+                $("#roleEditor").html(result);
+            }
+        });
+    }
+</script>

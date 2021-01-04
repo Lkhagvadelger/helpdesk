@@ -1,0 +1,122 @@
+﻿@model helpDesk.Entity.Complain
+
+@{
+    ViewBag.Title = "Хүсэлт оруулах";
+}
+
+<h2>Хүсэлт оруулах</h2>
+@if (ViewBag.currentUser != "")
+{
+    
+    <span class="label label-default"> Хүсэлтийг оруулсан хэрэглэгч л засах эрхтэй. Оруулсан: @ViewBag.currentUser </span>
+    
+}else{
+
+using (Html.BeginForm("Edit", "Complain", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.complain_date, "Огноо", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("complain_date", DateTime.Now, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.complain_date)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (helpDesk.Controllers.OrganisationController.OrganisationServiceType(User.Identity.Name) == "Үйлчилгээ")
+            {
+                @Html.LabelFor(model => model.system_id, "Үйлчилгээ", new { @class = "control-label col-md-2" })
+            }
+            else
+            {
+                @Html.LabelFor(model => model.system_id, "Систем", new { @class = "control-label col-md-2" })
+            }
+            <div class="col-md-10">
+                @Html.DropDownList("system_id", null, "- Систем сонгоно уу -", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.system_id)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.system_id, "Модул", new { @class = "control-label col-md-2" })
+            <div class="col-md-10" id="module_container">
+                @Html.DropDownList("module_id", null, "- Модуль сонгоно уу -", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.complain_type_id, "Хүсэлтийн төрөл", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("complain_type_id", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.complain_type_id)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.complain_text, "Хүсэлт", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextArea("complain_text", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.complain_type_id)
+            </div>
+        </div>
+       
+        <div class="form-group">
+            @Html.Label("Файл хавсаргах", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="file" id="file" class="form-control" />
+                <label>10mb-с доош зураг, pdf, doc, docx өргөтгөлтэй файлыг хавсаргаж болно.</label>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Хүсэлт оруулсан", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span class="label label-success">@Model.AspNetUser.UserName</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Засаж хадгалах" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+if (Model.document_name != null)
+{
+    <form action="/Complain/DeleteAttachedFile" method="post">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-10">
+                <a href="@("/Content/file/" + Model.document_url)" class="btn btn-default btn-sm">Харах</a>
+                    <input type="hidden" name="fileid" value="@Model.id" />
+                    <input type="hidden" name="url" value="@Model.document_url" />
+                    <input type="submit" value="Хавсаргасан файл устгах" class="btn btn-danger btn-sm" />
+                </div>
+            </div>
+        </div>
+    </form>
+}
+
+<script type="text/javascript">
+    $("#system_id").on('change', function () {
+        $.ajax({
+            type: "POST",
+            url: "/Complain/ModuleList",
+            cache: false,
+            data: { id: $(this).val() },
+            success: function (result) {
+                $("#module_container").html(result);
+            }
+        });
+    });
+</script>
+}<div>
+    @Html.ActionLink("Жагсаалтруу буцах", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

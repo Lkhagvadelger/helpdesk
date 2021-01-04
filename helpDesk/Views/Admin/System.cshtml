@@ -1,0 +1,13 @@
+﻿@model IEnumerable<helpDesk.Entity.SystemModule>
+<h2>Үйлчилгээ үзүүлж байгаа систем болон модуль</h2>
+<a href="/Admin/SystemAdd" class="btn btn-default btn-sm">Систем нэмэх</a>
+<br />
+<br />
+@if ((bool)ViewBag.list == true)
+{
+    @Html.Action("SystemList")
+}
+else
+{
+    @Html.Action("SystemEdit", new { id = ViewBag.id })
+}

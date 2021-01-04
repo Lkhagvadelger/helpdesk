@@ -1,0 +1,100 @@
+﻿@model IEnumerable<helpDesk.Entity.QA>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Асуулт
+        </th>
+        <th>
+            Хариулт
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="width:50%;">
+                <div>
+                    @Html.DisplayFor(modelItem => item.question)
+                </div>
+                <br />
+                <div>
+                    <div style="float:left">
+                        <div>
+
+                            <label class="glyphicon glyphicon-time"></label> <strong> @Html.DisplayFor(modelItem => item.ask_date)</strong>
+                        </div>
+                        <div>
+
+                            <label class="glyphicon glyphicon-file"></label> 
+                            @if (item.question_file != null)
+                                                                              {
+                                <a href="@("Content/file/" + item.question_file)">Харах</a>
+                                                                              }
+                        </div>
+                    </div>
+                    <div style="float:right">
+                        <div>
+                            <label class="glyphicon glyphicon-user"></label>  <strong>  @Html.DisplayFor(modelItem => item.AspNetUser1.UserName)</strong>
+                        </div>
+                        <div>
+                            <label class="glyphicon glyphicon-globe"></label>
+                            <span class="label label-primary">@item.Organisation.org_name</span>
+                            <a href="/QA/Question/@item.id">Засах</a>
+                            <strong>№: @item.id</strong>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                </div>
+
+            </td>
+            <td style="width:50%;">
+                @if (item.answer == null)
+                {
+                     <span class="label label-primary">@item.Organisation.org_name</span><span> хариулна</span><br />
+                    if (helpDesk.Controllers.OrganisationController.isInCompanyUser(item.Organisation.id, User.Identity.Name) == 1)
+                    { 
+                        <a href="/QA/Answer/@item.id">Асуултанд хариулах</a>
+                    }
+                }
+                else
+                {
+                    <div>
+                        @Html.DisplayFor(modelItem => item.answer)
+                    </div>
+                    <br />
+                    <div>
+                        <label class="glyphicon glyphicon-time"></label><strong> @Html.DisplayFor(modelItem => item.answer_date)</strong>
+                        Хариулт оруулсан: <strong>  @Html.DisplayFor(modelItem => item.AspNetUser.UserName)</strong>
+                    </div>
+                    <div style="float:left">
+                        <label class="glyphicon glyphicon-file"></label> @if (item.answer_file != null)
+                                                                         {
+                            <a href="@("Content/file/" + item.answer_file)">Харах</a>
+                                                                         }
+                    </div>
+                    <div style="float:right">
+                        @if (helpDesk.Controllers.QAController.IsInRoleUserQA(item.answer_user_id, User.Identity.Name))
+                        {
+                            if (item.answer_date == null || ((DateTime)item.answer_date) > DateTime.Now.AddDays(-2))
+                            { 
+                                <a href="/QA/Answer/@item.id">Засах</a>
+                            }
+                        }
+                    </div>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+@{int page = 1;}
+<ul class="pagination pagination-sm">
+    <li class="disabled"><a href="#">«</a></li>
+    @for (int i = 0; i <= ((int)ViewBag.maxSize) / 4; i++)
+    {
+        <li><a href="javascript:showPage('@(i + 1)')">@(page++)</a></li>
+    }
+    <li><a href="#">»</a></li>
+</ul>

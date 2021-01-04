@@ -1,0 +1,40 @@
+﻿@model IEnumerable<helpDesk.Entity.ComplainStatu>
+<h3>Төлвийн явц</h3>
+<table class="table table-bordered table-condensed table-striped">
+    <tr>
+        @foreach (var item in Model)
+        {
+            <td style="text-align:left">
+                <div class="icon-calendar">
+                    @(((DateTime)item.status_date).ToShortDateString())
+                    <br />
+                    <br />
+                </div>
+                <div>
+                    @if (item.status_id == 1)
+                    {<span class="label label-warning">Хүсэлт илгээгдсэн</span>
+                    }
+                    @if (item.status_id == 2)
+                    { <span class="label label-primary">Хүсэлт шалгагдаж байна</span>
+                    }
+                    @if (item.status_id == 3)
+                    {<span class="label label-success">Хүсэлт шийдвэрлэгдсэн</span>
+                    }
+                    @if (item.status_id == 4)
+                    {<span class="label label-info">Хүсэлт буцаагдсан</span>
+                    }
+                    @if (item.status_id == 5)
+                    {
+                        <span class="label label-default">Баталгаажуулагдаагүй</span>
+                    }
+                    <br />
+                    <br />
+                </div>
+                <div class="icon-bubble">
+                        @item.replay
+                </div>
+
+            </td>
+        }
+    </tr>
+</table>

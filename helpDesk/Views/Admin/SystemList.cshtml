@@ -1,0 +1,85 @@
+﻿@model IEnumerable<helpDesk.Entity.Organisation>
+<table class="table">
+    <tr>
+        <th>Байгууллага</th>
+        <th>Систем/Үйлчилгээ</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @item.org_name
+            </td>
+            <td>
+                @foreach (var sitem in item.SystemModules.Where(r => r.is_module == false))
+                {
+                    <div>
+                        @sitem.name
+                        <span id="system-status-@sitem.id" onclick="changeSystemModuleStatus(@sitem.id)" style="cursor:pointer">
+                            @if (sitem.is_enabled == true)
+                            {
+                                <span class='label label-success'>Идэвхтэй</span>
+                            }
+                            else
+                            {
+                                <span class="label label-warning">Идэвхгүй</span>
+                            }
+                        </span>
+                        <a href="/Admin/SystemEdit/@sitem.id">Засах</a>
+                    </div>
+                    foreach (var subitem in sitem.SystemModule1)
+                    {
+                        <table style="margin-left:200px;">
+                            <tr>
+                                <td style="min-width:200px">
+                                    <div style="float:left">
+                                        - @subitem.name
+                                    </div>
+                                    <div style="float:right">
+                                        <span id="system-status-@subitem.id" onclick="changeSystemModuleStatus(@subitem.id)" style="cursor:pointer">
+                                            @if (subitem.is_enabled == true)
+                                            {
+                                                <span class='label label-success'>Идэвхтэй</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-warning">Идэвхгүй</span>
+                                            }
+                                        </span>
+                                        <a href="/Admin/SystemEdit/@subitem.id">Засах</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+<script type="text/javascript">
+    function changeSystemModuleStatus(id) {
+        var cssid = "#system-status-" + id;
+        var value = false;
+        if ($(cssid).html().toString().indexOf("success") >= 0) {
+            value = false;
+            $(cssid).html("<span class='label label-warning'>Идэвхгүй</span>");
+        }
+        else {
+            value = true;
+            $(cssid).html("<span class='label label-success'>Идэвхтэй</span>");
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Admin/SystemModuleStatus",
+            cache: false,
+            data: { id: id, status: value },
+            success: function (result) {
+            }
+        });
+
+    }
+</script>

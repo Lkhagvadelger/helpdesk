@@ -1,0 +1,83 @@
+﻿@model helpDesk.Entity.Organisation
+@{
+    List<helpDesk.Entity.ComplainType> typeList = ViewBag.type as List<helpDesk.Entity.ComplainType>;
+    List<helpDesk.Entity.Status> statusList = ViewBag.status as List<helpDesk.Entity.Status>;
+
+}
+<table class="table table-bordered">
+    <tr>
+        <th colspan="7" style="text-align:center">@Model.org_name</th>
+    </tr>
+    <tr>
+        <th>Систем</th>
+        <th>Модуль</th>
+        @foreach (var sitem in typeList)
+        {
+            <th>
+                @sitem.complainType1
+            </th>
+        }
+    </tr>
+    @foreach (var item in Model.SystemModules.Where(r => r.is_module == false))
+    {
+        <tr>
+            <td>
+                <div style="float:left">@item.name</div>
+                <div style="float:right">
+                    <span class="label label-info">@item.SystemModule1.Sum(r => r.Complains.Where(e => e.Status.is_client == "0").Count())</span>
+                </div>
+            </td>
+            <td>
+                @foreach (var sitem in item.SystemModule1.OrderBy(r => r.id))
+                {
+                    <div>
+                        <div style="float:left">@sitem.name</div>
+                        <div style="float:right"><span class="label label-info">@sitem.Complains.Where(e => e.Status.is_client == "0").Count()</span></div>
+                    </div>
+                    <br />
+                }
+            </td>
+            @foreach (var sitem in typeList)
+            {
+                <td>
+                    @foreach (var subitem in item.SystemModule1.OrderBy(r => r.id))
+                    {
+                        <div>
+                            <div style="float:right">@subitem.Complains.Where(e => e.Status.is_client == "0").Where(r => r.complain_type_id == sitem.id).Count()</div>
+                        </div>
+                        <br />
+                    }
+                </td>
+            }
+        </tr>
+        <tr>
+            <td colspan="3">@Html.Action("ReportSystemChart", new { system_id = item.id })</td>
+            <td colspan="4">@Html.Action("ReportComplainStatus", new { system_id = item.id })</td>
+        </tr>
+    }
+</table>
+<table class="table table-bordered">
+    <tr>
+        <th colspan="7" style="text-align:center">Шийдэгдсэн төвлийн байдал</th>
+    </tr>
+    <tr>
+        @foreach (var sitem in statusList.Where(r => r.is_client == "0"))
+        {
+            <td style="width:25%">
+                <div style="float:left">
+                    <span class="label @sitem.label">@sitem.status_value</span>
+                </div>
+                <div style="float:right">
+                    @Model.Complains.Where(r => r.status_id == sitem.id).Count()
+                </div>
+            </td>
+        }
+    </tr>
+</table>
+@Html.Action("ReportQA", new { org_id = Model.id })
+    <div style="width:50%;float:left">
+        @Html.Action("ReportOrganisationChart", new { org_id = Model.id })
+    </div>
+    <div style="width:50%;float:right">
+        @Html.Action("ReportOrganisationStatus", new { org_id = Model.id })
+    </div>

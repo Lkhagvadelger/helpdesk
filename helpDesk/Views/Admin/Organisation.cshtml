@@ -1,0 +1,38 @@
+﻿@model IEnumerable<helpDesk.Entity.Organisation>
+@{
+    List<helpDesk.Entity.AspNetUser> users = ViewBag.orgUserList as List<helpDesk.Entity.AspNetUser>;
+}
+<h2>Харилцагч байгууллагууд</h2>
+<a href="/Admin/OrganisationAdd" class="btn btn-default btn-sm">Байгууллага нэмэх</a>
+<a href="/Admin/Register" class="btn btn-default btn-sm">Байгууллагын админ нэмэх</a>
+<br />
+<br />
+<table class="table">
+    <tr>
+        <th>Байгууллагын нэр</th>
+        <th>Ашиглах төрөл</th>
+        <th>Хэрэглэгчид / Нэвтрэх эрх</th>
+        <th>Үйлдэл</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.org_name</td>
+            <td>@item.service_type</td>
+            <td>
+                @foreach (var subitem in users.Where(r => r.organisation == item.id))
+                {
+                    <table>
+                        <tr>
+                            <td style="width:150px;">@subitem.UserName</td>
+                            <td>@Html.Action("ShowRoles", new { userid = subitem.Id })</td>
+                        </tr>
+                    </table>
+                }
+            </td>
+            <td>
+                <a href="/Admin/OrganisationEdit/@item.id" style="text-decoration:none">Засах</a>
+            </td>
+        </tr>
+    }
+</table>

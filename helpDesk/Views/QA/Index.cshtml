@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Асуултууд";
+}
+
+   
+<h2 style="float:left">Асуултын жагсаалт</h2>
+<br />
+<input style="float:right" type="text" id="search-value" onkeyup="SearchBoxAdd($(this).val())" class="form-control input-sm" placeholder="Хайх үгээ бичээд хай" />
+
+<br />
+<br />
+<div id="complain-list">
+    @Html.Action("QAList")
+</div>
+
+<script type="text/javascript">
+    function SearchBoxAdd(sval) {
+        if (sval !== "") {
+            $("#followingBallsG").show();
+            $.ajax({
+                type: "POST",
+                url: "/QA/QAList",
+                cache: false,
+                data: { value: sval },
+                success: function (result) {
+                    $("#complain-list").html(result);
+                    $("#followingBallsG").hide();
+                }
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/QA/QAList",
+                cache: false,
+                success: function (result) {
+                    $("#followingBallsG").hide();
+                    $("#complain-list").html(result);
+                }
+            });
+        }
+    }
+    function showPage(num) {
+        var value = $("#search-value").val();
+        $.ajax({
+            type: "POST",
+            url: "/QA/QAList",
+            cache: false,
+            data: { value: value, page: num },
+            success: function (result) {
+                $("#followingBallsG").hide();
+                $("#complain-list").html(result);
+            }
+        });
+    }
+</script>

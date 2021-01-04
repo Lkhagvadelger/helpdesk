@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div id="followingBallsG" style="display: none; position: fixed; margin-top: 100px; width: 200px; left: 50%; margin-left: -100px">
+                <div id="followingBallsG_1" class="followingBallsG">
+                </div>
+                <div id="followingBallsG_2" class="followingBallsG">
+                </div>
+                <div id="followingBallsG_3" class="followingBallsG">
+                </div>
+                <div id="followingBallsG_4" class="followingBallsG">
+                </div>
+            </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Newsonic", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (User.IsInRole("QAAsk") || User.IsInRole("QAAnswer") || User.IsInRole("Superadmin"))
+                    {
+                        string QA = "";
+                        if (User.IsInRole("Superadmin"))
+                        {
+                            QA = "QA(" + helpDesk.Controllers.OrganisationController.NewComplainCount() + ")";
+                        }
+                        else
+                        {
+                            QA = "QA";
+                        }
+                        <li>@Html.ActionLink(QA, "Index", "QA")</li>
+                        if (User.IsInRole("QAAdmin") || User.IsInRole("QAAsk"))
+                        {
+                        <li>@Html.ActionLink("QA Нэмэх", "Create", "QA")</li>
+                        }
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            @if (User.IsInRole("Superadmin"))
+                            {
+                                string huseld = "Хүсэлт(" + helpDesk.Controllers.OrganisationController.NewComplainCount() + ")";
+                                @Html.ActionLink(huseld, "Index", "Complain")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Хүсэлт", "Index", "Complain")
+                            }
+                        </li>
+                        <li>@Html.ActionLink("Хүсэлт оруулах", "Create", "Complain")</li>
+                    }
+                    @if (User.IsInRole("Superadmin"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Админ <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Admin">Админы хэсэг</a></li>
+                                <li><a href="/Admin/Admins">Админ хэрэглэгч</a></li>
+                                <li><a href="/Admin/Organisation">Бүртгэлтэй байгууллага</a></li>
+                                <li><a href="/Admin/System">Систем, төрөл оруулах</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/Report">Тайлан</a></li>
+                            </ul>
+                        </li>
+                    }
+                    <li>@Html.ActionLink("Заавар", "Index", "Tutorial")</li>
+                    @if (User.IsInRole("Subadmin"))
+                    {
+                        string link = helpDesk.Controllers.OrganisationController.OrganisationName(User.Identity.Name);
+
+                        <li>@Html.ActionLink(link, "Index", "Organisation")</li>
+
+                    }
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - "НЬЮСОНИК ХХК"-ны өмч</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

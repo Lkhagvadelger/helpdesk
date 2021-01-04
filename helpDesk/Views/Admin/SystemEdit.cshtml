@@ -1,0 +1,47 @@
+﻿@model helpDesk.Entity.SystemModule
+
+@{
+    ViewBag.Title = "Систем засах";
+}
+
+<h2>Систем засах</h2>
+
+@using (Html.BeginForm("SystemEdit","Admin",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.id)
+
+        @if (Model.is_module == true)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.name, "Систэмийн нэр", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                   @ViewBag.parent
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, "Нэр", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Хадгалах" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Байгууллагын жагсаалтруу буцах", "Organisation")
+</div>
+

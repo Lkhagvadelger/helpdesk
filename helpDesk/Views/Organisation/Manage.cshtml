@@ -1,0 +1,35 @@
+﻿@model helpDesk.Models.ManageUserViewModel
+@{ViewBag.Title = "Нууц үг солих";}
+@ViewBag.StatusMessage
+@using (Html.BeginForm("Manage", "Organisation", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" value="@ViewBag.userid" name="userid" />
+    <h4>Хуучин нууц үгийг устгаж шинэ нууц үг оноох</h4>
+    
+    <hr />
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.Label("Хэрэглэгчийн нэр", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Label((string)ViewBag.userName, new { @class = "col-md-2 control-label" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NewPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Нууц үг солих" class="btn btn-default" />
+        </div>
+    </div>
+}

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<helpDesk.Models.SystemChart>
+@{
+    string list = "";
+    string systemId = "#" + ViewBag.systemTitleId;
+    foreach (var item in Model)
+    {
+        if (list != "")
+        {
+            list += ",";
+        }
+        list += "{ module: '" + item.moduleName + "', total: " + item.totalComplain + " }";
+    }
+}
+<script>
+    $(function () {
+        var dataSource = [
+        ];
+        dataSource.push(@Html.Raw(list))
+        var systemid = '@systemId';
+        $(systemid).dxPieChart({
+            size: {
+                width: 500
+            },
+            dataSource: dataSource,
+            series: [
+                {
+                    argumentField: "module",
+                    valueField: "total",
+                    label: {
+                        visible: true,
+                        connector: {
+                            visible: true,
+                            width: 1
+                        }
+                    }
+                }
+            ],
+            title: "Модуль бүрийн эзлэх тоо"
+        });
+    }
+
+    );
+</script>
+<div id="@ViewBag.systemTitleId" class="case-container" style="width: 200px; height: 300px;"></div>

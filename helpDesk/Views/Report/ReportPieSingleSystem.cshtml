@@ -1,0 +1,51 @@
+﻿@{
+    string a = "{ state: 'Монгол', aldaa: 6.7, sanal: 28.6, gomdol: 5.1, talarhal: 5.1, busad: 5.1 }";
+
+}
+<script>
+    var dataSource = [
+        { state: "Germany", aldaa: 6.7, sanal: 28.6, gomdol: 5.1, talarhal: 5.1, busad: 5.1 },
+    ];
+    dataSource.push(@Html.Raw(a));
+    dataSource.push(@Html.Raw(a));
+
+    var org_name = "asdf";
+    $(function () {
+        var id = '@ViewBag.org_id';
+        $("#chartContainer").dxChart({
+            dataSource: dataSource,
+            commonSeriesSettings: {
+                argumentField: "state",
+                type: "stackedBar"
+            },
+            series: [
+                { valueField: "sanal", name: "Санал" },
+                { valueField: "aldaa", name: "Алдаа" },
+                { valueField: "gomdol", name: "Гомдол" },
+                { valueField: "talarhal", name: "Талархал" },
+                { valueField: "busad", name: "Бусад" },
+            ],
+            legend: {
+                verticalAlignment: "bottom",
+                horizontalAlignment: "center",
+                itemTextPosition: 'top'
+            },
+            valueAxis: {
+                title: {
+                    text: "Тоогоор"
+                },
+                position: "right"
+            },
+            title: org_name,
+            tooltip: {
+                enabled: true,
+                customizeText: function () {
+                    return this.seriesName + ": " + this.valueText;
+                }
+            }
+        });
+    }
+
+    );
+</script>
+<div id="chartContainer" class="case-container" style="width: 50%; height: 440px;"></div>

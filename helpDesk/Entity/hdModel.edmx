@@ -1,0 +1,1003 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="helpDescModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="helpDescModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="helpDescModel.Store.__MigrationHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AspNetRoles" EntityType="helpDescModel.Store.AspNetRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AspNetUserClaims" EntityType="helpDescModel.Store.AspNetUserClaims" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AspNetUserLogins" EntityType="helpDescModel.Store.AspNetUserLogins" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AspNetUserRoles" EntityType="helpDescModel.Store.AspNetUserRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AspNetUsers" EntityType="helpDescModel.Store.AspNetUsers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Complain" EntityType="helpDescModel.Store.Complain" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ComplainStatus" EntityType="helpDescModel.Store.ComplainStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ComplainType" EntityType="helpDescModel.Store.ComplainType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Organisation" EntityType="helpDescModel.Store.Organisation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="QA" EntityType="helpDescModel.Store.QA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Status" EntityType="helpDescModel.Store.Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SystemModule" EntityType="helpDescModel.Store.SystemModule" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CompainStatus_Complain" Association="helpDescModel.Store.FK_CompainStatus_Complain">
+            <End Role="Complain" EntitySet="Complain" />
+            <End Role="ComplainStatus" EntitySet="ComplainStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompainStatus_Status" Association="helpDescModel.Store.FK_CompainStatus_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="ComplainStatus" EntitySet="ComplainStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complain_AspNetUsers" Association="helpDescModel.Store.FK_Complain_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Complain" EntitySet="Complain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complain_ComplainType" Association="helpDescModel.Store.FK_Complain_ComplainType">
+            <End Role="ComplainType" EntitySet="ComplainType" />
+            <End Role="Complain" EntitySet="Complain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complain_Organisation" Association="helpDescModel.Store.FK_Complain_Organisation">
+            <End Role="Organisation" EntitySet="Organisation" />
+            <End Role="Complain" EntitySet="Complain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complain_Status" Association="helpDescModel.Store.FK_Complain_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Complain" EntitySet="Complain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complain_SystemModule" Association="helpDescModel.Store.FK_Complain_SystemModule">
+            <End Role="SystemModule" EntitySet="SystemModule" />
+            <End Role="Complain" EntitySet="Complain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="helpDescModel.Store.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="helpDescModel.Store.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="helpDescModel.Store.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="helpDescModel.Store.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QA_AspNetUsers" Association="helpDescModel.Store.FK_QA_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="QA" EntitySet="QA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QA_Organisation" Association="helpDescModel.Store.FK_QA_Organisation">
+            <End Role="Organisation" EntitySet="Organisation" />
+            <End Role="QA" EntitySet="QA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QA_QA" Association="helpDescModel.Store.FK_QA_QA">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="QA" EntitySet="QA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemModule_Organisation" Association="helpDescModel.Store.FK_SystemModule_Organisation">
+            <End Role="Organisation" EntitySet="Organisation" />
+            <End Role="SystemModule" EntitySet="SystemModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemModule_SystemModule" Association="helpDescModel.Store.FK_SystemModule_SystemModule">
+            <End Role="SystemModule" EntitySet="SystemModule" />
+            <End Role="SystemModule1" EntitySet="SystemModule" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="ContextKey" Type="nvarchar" Nullable="false" MaxLength="300" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" Nullable="false" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+          <Property Name="User_Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="LoginProvider" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="ProviderKey" Type="nvarchar" Nullable="false" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="RoleId" Type="nvarchar" Nullable="false" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="organisation" Type="int" />
+          <Property Name="Discriminator" Type="nvarchar" Nullable="false" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Complain">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="org_id" Type="int" />
+          <Property Name="user_id" Type="nvarchar" MaxLength="128" />
+          <Property Name="inserted_date" Type="datetime" />
+          <Property Name="complain_date" Type="datetime" />
+          <Property Name="system_id" Type="int" />
+          <Property Name="complain_type_id" Type="int" />
+          <Property Name="status_id" Type="int" />
+          <Property Name="complain_text" Type="nvarchar(max)" />
+          <Property Name="document_url" Type="nvarchar(max)" />
+          <Property Name="document_name" Type="nvarchar(max)" />
+          <Property Name="is_delete" Type="bit" />
+          <Property Name="replay" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ComplainStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="status_id" Type="int" />
+          <Property Name="complain_id" Type="int" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="status_date" Type="datetime" />
+          <Property Name="replay" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ComplainType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="complainType" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Organisation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="org_name" Type="nvarchar(max)" />
+          <Property Name="service_type" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="QA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="nvarchar(max)" />
+          <Property Name="answer" Type="nvarchar(max)" />
+          <Property Name="ask_date" Type="datetime" />
+          <Property Name="answer_date" Type="datetime" />
+          <Property Name="answer_user_id" Type="nvarchar" MaxLength="128" />
+          <Property Name="question_user_id" Type="nvarchar" MaxLength="128" />
+          <Property Name="question_file" Type="nvarchar(max)" />
+          <Property Name="answer_file" Type="nvarchar(max)" />
+          <Property Name="org_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="status_value" Type="nvarchar(max)" />
+          <Property Name="label" Type="nvarchar" MaxLength="50" />
+          <Property Name="is_client" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SystemModule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="organisation_id" Type="int" />
+          <Property Name="parent_id" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" />
+          <Property Name="is_module" Type="bit" />
+          <Property Name="is_enabled" Type="bit" />
+        </EntityType>
+        <Association Name="FK_CompainStatus_Complain">
+          <End Role="Complain" Type="helpDescModel.Store.Complain" Multiplicity="0..1" />
+          <End Role="ComplainStatus" Type="helpDescModel.Store.ComplainStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Complain">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ComplainStatus">
+              <PropertyRef Name="complain_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompainStatus_Status">
+          <End Role="Status" Type="helpDescModel.Store.Status" Multiplicity="0..1" />
+          <End Role="ComplainStatus" Type="helpDescModel.Store.ComplainStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ComplainStatus">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complain_AspNetUsers">
+          <End Role="AspNetUsers" Type="helpDescModel.Store.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Complain" Type="helpDescModel.Store.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complain">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complain_ComplainType">
+          <End Role="ComplainType" Type="helpDescModel.Store.ComplainType" Multiplicity="0..1" />
+          <End Role="Complain" Type="helpDescModel.Store.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComplainType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Complain">
+              <PropertyRef Name="complain_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complain_Organisation">
+          <End Role="Organisation" Type="helpDescModel.Store.Organisation" Multiplicity="0..1" />
+          <End Role="Complain" Type="helpDescModel.Store.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organisation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Complain">
+              <PropertyRef Name="org_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complain_Status">
+          <End Role="Status" Type="helpDescModel.Store.Status" Multiplicity="0..1" />
+          <End Role="Complain" Type="helpDescModel.Store.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Complain">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complain_SystemModule">
+          <End Role="SystemModule" Type="helpDescModel.Store.SystemModule" Multiplicity="0..1" />
+          <End Role="Complain" Type="helpDescModel.Store.Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemModule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Complain">
+              <PropertyRef Name="system_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+          <End Role="AspNetUsers" Type="helpDescModel.Store.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="helpDescModel.Store.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="helpDescModel.Store.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="helpDescModel.Store.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="helpDescModel.Store.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="helpDescModel.Store.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="helpDescModel.Store.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="helpDescModel.Store.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QA_AspNetUsers">
+          <End Role="AspNetUsers" Type="helpDescModel.Store.AspNetUsers" Multiplicity="0..1" />
+          <End Role="QA" Type="helpDescModel.Store.QA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QA">
+              <PropertyRef Name="answer_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QA_Organisation">
+          <End Role="Organisation" Type="helpDescModel.Store.Organisation" Multiplicity="0..1" />
+          <End Role="QA" Type="helpDescModel.Store.QA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organisation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QA">
+              <PropertyRef Name="org_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QA_QA">
+          <End Role="AspNetUsers" Type="helpDescModel.Store.AspNetUsers" Multiplicity="0..1" />
+          <End Role="QA" Type="helpDescModel.Store.QA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QA">
+              <PropertyRef Name="question_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemModule_Organisation">
+          <End Role="Organisation" Type="helpDescModel.Store.Organisation" Multiplicity="0..1" />
+          <End Role="SystemModule" Type="helpDescModel.Store.SystemModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organisation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SystemModule">
+              <PropertyRef Name="organisation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemModule_SystemModule">
+          <End Role="SystemModule" Type="helpDescModel.Store.SystemModule" Multiplicity="0..1" />
+          <End Role="SystemModule1" Type="helpDescModel.Store.SystemModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemModule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SystemModule1">
+              <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="helpDescModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="helpDescEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="helpDescModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="helpDescModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="helpDescModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="helpDescModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="helpDescModel.AspNetUser" />
+          <EntitySet Name="Complains" EntityType="helpDescModel.Complain" />
+          <EntitySet Name="ComplainStatus" EntityType="helpDescModel.ComplainStatu" />
+          <EntitySet Name="ComplainTypes" EntityType="helpDescModel.ComplainType" />
+          <EntitySet Name="Organisations" EntityType="helpDescModel.Organisation" />
+          <EntitySet Name="QAs" EntityType="helpDescModel.QA" />
+          <EntitySet Name="Status" EntityType="helpDescModel.Status" />
+          <EntitySet Name="SystemModules" EntityType="helpDescModel.SystemModule" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="helpDescModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="helpDescModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complain_AspNetUsers" Association="helpDescModel.FK_Complain_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Complain" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QA_AspNetUsers" Association="helpDescModel.FK_QA_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="QA" EntitySet="QAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QA_QA" Association="helpDescModel.FK_QA_QA">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="QA" EntitySet="QAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompainStatus_Complain" Association="helpDescModel.FK_CompainStatus_Complain">
+            <End Role="Complain" EntitySet="Complains" />
+            <End Role="ComplainStatu" EntitySet="ComplainStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complain_ComplainType" Association="helpDescModel.FK_Complain_ComplainType">
+            <End Role="ComplainType" EntitySet="ComplainTypes" />
+            <End Role="Complain" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complain_Organisation" Association="helpDescModel.FK_Complain_Organisation">
+            <End Role="Organisation" EntitySet="Organisations" />
+            <End Role="Complain" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complain_Status" Association="helpDescModel.FK_Complain_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Complain" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Complain_SystemModule" Association="helpDescModel.FK_Complain_SystemModule">
+            <End Role="SystemModule" EntitySet="SystemModules" />
+            <End Role="Complain" EntitySet="Complains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompainStatus_Status" Association="helpDescModel.FK_CompainStatus_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="ComplainStatu" EntitySet="ComplainStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QA_Organisation" Association="helpDescModel.FK_QA_Organisation">
+            <End Role="Organisation" EntitySet="Organisations" />
+            <End Role="QA" EntitySet="QAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemModule_Organisation" Association="helpDescModel.FK_SystemModule_Organisation">
+            <End Role="Organisation" EntitySet="Organisations" />
+            <End Role="SystemModule" EntitySet="SystemModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemModule_SystemModule" Association="helpDescModel.FK_SystemModule_SystemModule">
+            <End Role="SystemModule" EntitySet="SystemModules" />
+            <End Role="SystemModule1" EntitySet="SystemModules" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="helpDescModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Type="String" Name="MigrationId" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ContextKey" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="Model" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="ProductVersion" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="helpDescModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ClaimType" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ClaimValue" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="User_Id" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="helpDescModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoginProvider" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ProviderKey" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="helpDescModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordHash" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SecurityStamp" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="organisation" />
+          <Property Type="String" Name="Discriminator" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="helpDescModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="helpDescModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="Complains" Relationship="helpDescModel.FK_Complain_AspNetUsers" FromRole="AspNetUser" ToRole="Complain" />
+          <NavigationProperty Name="QAs" Relationship="helpDescModel.FK_QA_AspNetUsers" FromRole="AspNetUser" ToRole="QA" />
+          <NavigationProperty Name="QAs1" Relationship="helpDescModel.FK_QA_QA" FromRole="AspNetUser" ToRole="QA" />
+          <NavigationProperty Name="AspNetRoles" Relationship="helpDescModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="Complain">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="org_id" />
+          <Property Type="String" Name="user_id" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="inserted_date" Precision="3" />
+          <Property Type="DateTime" Name="complain_date" Precision="3" />
+          <Property Type="Int32" Name="system_id" />
+          <Property Type="Int32" Name="complain_type_id" />
+          <Property Type="Int32" Name="status_id" />
+          <Property Type="String" Name="complain_text" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="document_url" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="document_name" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="is_delete" />
+          <Property Type="String" Name="replay" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="helpDescModel.FK_Complain_AspNetUsers" FromRole="Complain" ToRole="AspNetUser" />
+          <NavigationProperty Name="ComplainStatus" Relationship="helpDescModel.FK_CompainStatus_Complain" FromRole="Complain" ToRole="ComplainStatu" />
+          <NavigationProperty Name="ComplainType" Relationship="helpDescModel.FK_Complain_ComplainType" FromRole="Complain" ToRole="ComplainType" />
+          <NavigationProperty Name="Organisation" Relationship="helpDescModel.FK_Complain_Organisation" FromRole="Complain" ToRole="Organisation" />
+          <NavigationProperty Name="Status" Relationship="helpDescModel.FK_Complain_Status" FromRole="Complain" ToRole="Status" />
+          <NavigationProperty Name="SystemModule" Relationship="helpDescModel.FK_Complain_SystemModule" FromRole="Complain" ToRole="SystemModule" />
+        </EntityType>
+        <EntityType Name="ComplainStatu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="status_id" />
+          <Property Type="Int32" Name="complain_id" />
+          <Property Type="Boolean" Name="is_active" />
+          <Property Type="DateTime" Name="status_date" Precision="3" />
+          <Property Type="String" Name="replay" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Complain" Relationship="helpDescModel.FK_CompainStatus_Complain" FromRole="ComplainStatu" ToRole="Complain" />
+          <NavigationProperty Name="Status" Relationship="helpDescModel.FK_CompainStatus_Status" FromRole="ComplainStatu" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="ComplainType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="complainType1" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Complains" Relationship="helpDescModel.FK_Complain_ComplainType" FromRole="ComplainType" ToRole="Complain" />
+        </EntityType>
+        <EntityType Name="Organisation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="org_name" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="service_type" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Complains" Relationship="helpDescModel.FK_Complain_Organisation" FromRole="Organisation" ToRole="Complain" />
+          <NavigationProperty Name="QAs" Relationship="helpDescModel.FK_QA_Organisation" FromRole="Organisation" ToRole="QA" />
+          <NavigationProperty Name="SystemModules" Relationship="helpDescModel.FK_SystemModule_Organisation" FromRole="Organisation" ToRole="SystemModule" />
+        </EntityType>
+        <EntityType Name="QA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="question" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="answer" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ask_date" Precision="3" />
+          <Property Type="DateTime" Name="answer_date" Precision="3" />
+          <Property Type="String" Name="answer_user_id" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="question_user_id" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="question_file" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="answer_file" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="org_id" />
+          <NavigationProperty Name="AspNetUser" Relationship="helpDescModel.FK_QA_AspNetUsers" FromRole="QA" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser1" Relationship="helpDescModel.FK_QA_QA" FromRole="QA" ToRole="AspNetUser" />
+          <NavigationProperty Name="Organisation" Relationship="helpDescModel.FK_QA_Organisation" FromRole="QA" ToRole="Organisation" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="status_value" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="label" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="is_client" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Complains" Relationship="helpDescModel.FK_Complain_Status" FromRole="Status" ToRole="Complain" />
+          <NavigationProperty Name="ComplainStatus" Relationship="helpDescModel.FK_CompainStatus_Status" FromRole="Status" ToRole="ComplainStatu" />
+        </EntityType>
+        <EntityType Name="SystemModule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="organisation_id" />
+          <Property Type="Int32" Name="parent_id" />
+          <Property Type="String" Name="name" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="is_module" />
+          <Property Type="Boolean" Name="is_enabled" />
+          <NavigationProperty Name="Complains" Relationship="helpDescModel.FK_Complain_SystemModule" FromRole="SystemModule" ToRole="Complain" />
+          <NavigationProperty Name="Organisation" Relationship="helpDescModel.FK_SystemModule_Organisation" FromRole="SystemModule" ToRole="Organisation" />
+          <NavigationProperty Name="SystemModule1" Relationship="helpDescModel.FK_SystemModule_SystemModule" FromRole="SystemModule" ToRole="SystemModule1" />
+          <NavigationProperty Name="SystemModule2" Relationship="helpDescModel.FK_SystemModule_SystemModule" FromRole="SystemModule1" ToRole="SystemModule" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+          <End Type="helpDescModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="helpDescModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="helpDescModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="helpDescModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complain_AspNetUsers">
+          <End Type="helpDescModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="helpDescModel.Complain" Role="Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Complain">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QA_AspNetUsers">
+          <End Type="helpDescModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="helpDescModel.QA" Role="QA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QA">
+              <PropertyRef Name="answer_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QA_QA">
+          <End Type="helpDescModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="helpDescModel.QA" Role="QA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QA">
+              <PropertyRef Name="question_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompainStatus_Complain">
+          <End Type="helpDescModel.Complain" Role="Complain" Multiplicity="0..1" />
+          <End Type="helpDescModel.ComplainStatu" Role="ComplainStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Complain">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ComplainStatu">
+              <PropertyRef Name="complain_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complain_ComplainType">
+          <End Type="helpDescModel.ComplainType" Role="ComplainType" Multiplicity="0..1" />
+          <End Type="helpDescModel.Complain" Role="Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComplainType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Complain">
+              <PropertyRef Name="complain_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complain_Organisation">
+          <End Type="helpDescModel.Organisation" Role="Organisation" Multiplicity="0..1" />
+          <End Type="helpDescModel.Complain" Role="Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organisation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Complain">
+              <PropertyRef Name="org_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complain_Status">
+          <End Type="helpDescModel.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="helpDescModel.Complain" Role="Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Complain">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Complain_SystemModule">
+          <End Type="helpDescModel.SystemModule" Role="SystemModule" Multiplicity="0..1" />
+          <End Type="helpDescModel.Complain" Role="Complain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemModule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Complain">
+              <PropertyRef Name="system_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompainStatus_Status">
+          <End Type="helpDescModel.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="helpDescModel.ComplainStatu" Role="ComplainStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ComplainStatu">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QA_Organisation">
+          <End Type="helpDescModel.Organisation" Role="Organisation" Multiplicity="0..1" />
+          <End Type="helpDescModel.QA" Role="QA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organisation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QA">
+              <PropertyRef Name="org_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemModule_Organisation">
+          <End Type="helpDescModel.Organisation" Role="Organisation" Multiplicity="0..1" />
+          <End Type="helpDescModel.SystemModule" Role="SystemModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organisation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SystemModule">
+              <PropertyRef Name="organisation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemModule_SystemModule">
+          <End Type="helpDescModel.SystemModule" Role="SystemModule" Multiplicity="0..1" />
+          <End Type="helpDescModel.SystemModule" Role="SystemModule1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemModule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SystemModule1">
+              <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="helpDescModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="helpDescModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="helpDescModelStoreContainer" CdmEntityContainer="helpDescEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="helpDescModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="helpDescModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="helpDescModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="helpDescModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="helpDescModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="organisation" ColumnName="organisation" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Complains">
+            <EntityTypeMapping TypeName="helpDescModel.Complain">
+              <MappingFragment StoreEntitySet="Complain">
+                <ScalarProperty Name="replay" ColumnName="replay" />
+                <ScalarProperty Name="is_delete" ColumnName="is_delete" />
+                <ScalarProperty Name="document_name" ColumnName="document_name" />
+                <ScalarProperty Name="document_url" ColumnName="document_url" />
+                <ScalarProperty Name="complain_text" ColumnName="complain_text" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="complain_type_id" ColumnName="complain_type_id" />
+                <ScalarProperty Name="system_id" ColumnName="system_id" />
+                <ScalarProperty Name="complain_date" ColumnName="complain_date" />
+                <ScalarProperty Name="inserted_date" ColumnName="inserted_date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="org_id" ColumnName="org_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComplainStatus">
+            <EntityTypeMapping TypeName="helpDescModel.ComplainStatu">
+              <MappingFragment StoreEntitySet="ComplainStatus">
+                <ScalarProperty Name="replay" ColumnName="replay" />
+                <ScalarProperty Name="status_date" ColumnName="status_date" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="complain_id" ColumnName="complain_id" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComplainTypes">
+            <EntityTypeMapping TypeName="helpDescModel.ComplainType">
+              <MappingFragment StoreEntitySet="ComplainType">
+                <ScalarProperty Name="complainType1" ColumnName="complainType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organisations">
+            <EntityTypeMapping TypeName="helpDescModel.Organisation">
+              <MappingFragment StoreEntitySet="Organisation">
+                <ScalarProperty Name="service_type" ColumnName="service_type" />
+                <ScalarProperty Name="org_name" ColumnName="org_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QAs">
+            <EntityTypeMapping TypeName="helpDescModel.QA">
+              <MappingFragment StoreEntitySet="QA">
+                <ScalarProperty Name="org_id" ColumnName="org_id" />
+                <ScalarProperty Name="answer_file" ColumnName="answer_file" />
+                <ScalarProperty Name="question_file" ColumnName="question_file" />
+                <ScalarProperty Name="question_user_id" ColumnName="question_user_id" />
+                <ScalarProperty Name="answer_user_id" ColumnName="answer_user_id" />
+                <ScalarProperty Name="answer_date" ColumnName="answer_date" />
+                <ScalarProperty Name="ask_date" ColumnName="ask_date" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="helpDescModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="is_client" ColumnName="is_client" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="status_value" ColumnName="status_value" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemModules">
+            <EntityTypeMapping TypeName="helpDescModel.SystemModule">
+              <MappingFragment StoreEntitySet="SystemModule">
+                <ScalarProperty Name="is_enabled" ColumnName="is_enabled" />
+                <ScalarProperty Name="is_module" ColumnName="is_module" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="organisation_id" ColumnName="organisation_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="helpDescModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

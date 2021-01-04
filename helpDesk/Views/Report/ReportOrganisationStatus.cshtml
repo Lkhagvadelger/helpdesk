@@ -1,0 +1,59 @@
+﻿@{
+    List<helpDesk.Models.OrganisationStatusChart> strlist = ViewBag.stringlist as List<helpDesk.Models.OrganisationStatusChart>;
+    string rawstring = "";
+    string divId = "#" + ViewBag.titleId;
+    foreach (var item in strlist)
+    {
+        if (rawstring != "")
+        {
+            rawstring += ",";
+        }
+        rawstring += "{ system: '" + item.system + "', ilgeegdsen: " + item.ilgeegdsen + ", shalgagdajbna: " + item.shalgagdajbna +
+            ", shiidverlegdsen: " + item.shiidverlegdsen + ", butsaagdsan: " + item.butsaagdsan + " }";
+    }
+}
+<script>
+    var dataSource = [
+    ];
+    dataSource.push(@Html.Raw(rawstring));
+    var org_name = '@ViewBag.title';
+    var chartId = '@divId';
+    $(function () {
+        var id = '@ViewBag.sourceId';
+        $(chartId).dxChart({
+            dataSource: dataSource,
+            commonSeriesSettings: {
+                argumentField: "system",
+                type: "fullStackedBar"
+            },
+            series: [
+                { valueField: "ilgeegdsen", name: "Хүсэлт илгээгдсэн" },
+                { valueField: "shalgagdajbna", name: "Хүсэлт шалгагдаж байна" },
+                { valueField: "shiidverlegdsen", name: "Хүсэлт шийдвэрлэгдсэн" },
+                { valueField: "butsaagdsan", name: "Хүсэлт буцаагдсан" },
+            ],
+            legend: {
+                verticalAlignment: "bottom",
+                horizontalAlignment: "center",
+                itemTextPosition: 'top'
+            },
+            valueAxis: {
+                title: {
+                    text: "Хувиар"
+                },
+                position: "right"
+            },
+            title: org_name,
+            tooltip: {
+                enabled: true,
+                customizeText: function () {
+                    return this.seriesName + ": " + this.valueText;
+                }
+            }
+        });
+    }
+
+    );
+</script>
+<h2>Нийт хүсэлтийг төлвийн байдлаар нь</h2>
+<div id="@ViewBag.titleId" class="case-container" style="width: 100%; height: 300px;"></div>

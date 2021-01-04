@@ -1,0 +1,61 @@
+﻿@{
+    List<helpDesk.Models.OrganisationChart> strlist = ViewBag.stringlist as List<helpDesk.Models.OrganisationChart>;
+    string rawstring = "";
+    string divId = "#" + ViewBag.titleId;
+    foreach (var item in strlist)
+    {
+        if (rawstring != "")
+        {
+            rawstring += ",";
+        }
+        rawstring += "{ system: '" + item.system + "', aldaa: " + item.aldaa + ", sanal: " + item.sanal +
+            ", gomdol: " + item.gomdol + ", talarhal: " + item.talarhal + ", busad: " + item.busad + " }";
+    }
+}
+<script>
+    var dataSource = [
+    ];
+    dataSource.push(@Html.Raw(rawstring));
+    var org_name = '@ViewBag.title';
+    var chartId = '@divId';
+    $(function () {
+        var id = '@ViewBag.sourceId';
+        $(chartId).dxChart({
+            dataSource: dataSource,
+            commonSeriesSettings: {
+                argumentField: "system",
+                type: "stackedBar"
+            },
+            series: [
+                { valueField: "sanal", name: "Санал" },
+                { valueField: "aldaa", name: "Алдаа" },
+                { valueField: "gomdol", name: "Гомдол" },
+                { valueField: "talarhal", name: "Талархал" },
+                { valueField: "busad", name: "Бусад" },
+            ],
+            legend: {
+                verticalAlignment: "bottom",
+                horizontalAlignment: "center",
+                itemTextPosition: 'top'
+            },
+            valueAxis: {
+                title: {
+                    text: "Тоогоор"
+                },
+                position: "right"
+            },
+            title: org_name,
+            tooltip: {
+                enabled: true,
+                customizeText: function () {
+                    return this.seriesName + ": " + this.valueText;
+                }
+            }
+        });
+    }
+
+    );
+</script>
+<h2>Нийт хүсэлтийг төрлийн байдлаар нь</h2>
+
+<div id="@ViewBag.titleId" class="case-container" style="width: 100%; height: 300px;"></div>

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<helpDesk.Entity.SystemModule>
+<h2>Үйлчилгээ үзүүлж байгаа систем болон модуль</h2>
+<a href="/Admin/SystemAdd" class="btn btn-default btn-sm">Систем нэмэх</a>
+<br />
+<br />
+<table class="table">
+    <tr>
+        <th>Байгууллага</th>
+        <th>Систем/Үйлчилгээ</th>
+        <th>Модуль/Дэд үйлчилгээ</th>
+        <th>Төлөв</th>
+    </tr>
+    @foreach (var item in Model.Where(r => r.is_module == false))
+    {
+        <tr>
+            <td>
+                @item.Organisation.org_name
+            </td>
+            <td>
+                @item.name
+            </td>
+            <td>
+                @foreach (var subitem in item.SystemModule1)
+                {
+                    <table>
+                        <tr>
+                            <td style="min-width:200px">@subitem.name</td>
+                            <td id="system-status-@subitem.id" onclick="changeSystemModuleStatus(@subitem.id)" style="cursor:pointer">
+                                @if (subitem.is_enabled == true)
+                                {
+                                    <span class='label label-success'>Идэвхтэй</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-warning">Идэвхгүй</span>
+                                }
+                            </td>
+                            <td>Засах</td>
+                        </tr>
+                    </table>
+                }
+            </td>
+            <td id="system-status-@item.id" onclick="changeSystemModuleStatus(@item.id)" style="cursor:pointer">
+                @if (item.is_enabled == true)
+                {
+                    <span class='label label-success'>Идэвхтэй</span>
+                }
+                else
+                {
+                    <span class="label label-warning">Идэвхгүй</span>
+                }
+            </td>
+
+        </tr>
+    }
+</table>
+<script type="text/javascript">
+    function changeSystemModuleStatus(id) {
+        var cssid = "#system-status-" + id;
+        var value = false;
+        if ($(cssid).html().toString().indexOf("success") >= 0) {
+            value = false;
+            $(cssid).html("<span class='label label-warning'>Идэвхгүй</span>");
+        }
+        else {
+            value = true;
+            $(cssid).html("<span class='label label-success'>Идэвхтэй</span>");
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Admin/SystemModuleStatus",
+            cache: false,
+            data: { id: id, status: value },
+            success: function (result) {
+            }
+        });
+
+    }
+</script>

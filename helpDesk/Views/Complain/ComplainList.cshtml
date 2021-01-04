@@ -1,0 +1,141 @@
+﻿@model IEnumerable<helpDesk.Entity.Complain>
+<table class="table table-bordered table-condensed">
+    <tr>
+        <th>
+            <span>Дугаар</span>
+        </th>
+        <th>
+            <span>Байгууллага</span>
+        </th>
+        <th>
+            <span>Огноо</span>
+        </th>
+        <th>
+            <span>Оруулсан</span>
+        </th>
+        <th>
+            @if (helpDesk.Controllers.OrganisationController.OrganisationServiceType(User.Identity.Name) == "Үйлчилгээ")
+            {
+                <span>Үйлчилгээ</span>
+            }
+            else
+            {
+                <span>Систем</span>
+            }
+        </th>
+        <th>
+            <span>Модуль</span>
+        </th>
+        <th>
+            <span>Төрөл</span>
+        </th>
+        <th>
+            <span>Тайлбар</span>
+        </th>
+        <th>
+            <span>Төлөв</span>
+        </th>
+        <th>
+            <span>Хавсралт</span>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.id + "", "Details", new { id = item.id }, new { style = "text-decoration:none;" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Organisation.org_name)
+            </td>
+            <td>
+                @(((DateTime)item.complain_date).ToShortDateString())
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SystemModule.SystemModule2.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SystemModule.name)
+            </td>
+            <td>
+                @if (item.complain_type_id == 1)
+                {
+                    @Html.DisplayFor(modelItem => item.ComplainType.complainType1)
+                    <span style="color:red" class="pull-right glyphicon glyphicon-warning-sign"></span>
+                }
+                else
+                    if (item.complain_type_id == 2)
+                    {
+                        @Html.DisplayFor(modelItem => item.ComplainType.complainType1)
+                        <span style="color:orangered" class="pull-right glyphicon glyphicon-hand-up"></span>
+                    }
+
+                    else if (item.complain_type_id == 3)
+                    {
+                        @Html.DisplayFor(modelItem => item.ComplainType.complainType1)
+                        <span class="pull-right glyphicon glyphicon-star-empty"></span>
+                    }
+                    else if (item.complain_type_id == 4)
+                    {
+                        @Html.DisplayFor(modelItem => item.ComplainType.complainType1)
+                        <span style="color:green" class="pull-right glyphicon glyphicon-thumbs-up"></span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.ComplainType.complainType1)
+                        <span style="color:green" class="pull-right glyphicon glyphicon-off"></span>
+
+                    }
+            </td>
+            <td style="font-size:11px">
+                @if (item.complain_text != null && item.complain_text.Length > 21)
+                {
+                    @(item.complain_text.Substring(0, 20) + "...")
+                }
+                else
+                {
+                    @item.complain_text
+                }
+            </td>
+            <td style="text-align:center">
+                @if (item.status_id == 1)
+                {<span class="label label-warning">Хүсэлт илгээгдсэн</span>
+                }
+                @if (item.status_id == 2)
+                { <span class="label label-primary">Хүсэлт шалгагдаж байна</span>
+                }
+                @if (item.status_id == 3)
+                {<span class="label label-success">Хүсэлт шийдвэрлэгдсэн</span>
+                }
+                @if (item.status_id == 4)
+                {<span class="label label-info">Хүсэлт буцаагдсан</span>
+                }
+                @if (item.status_id == 5)
+                {<span class="label label-default">Баталгаажуулагдаагүй</span>
+                }
+            </td>
+
+            <td>
+                @if (item.document_name != null)
+                {
+
+                    <a href="@("Content/file/"+item.document_url)">Харах</a>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+@{int page = 1;}
+<ul class="pagination pagination-sm">
+    <li class="disabled"><a href="#">«</a></li>
+    @for (int i = 0; i <= ((int)ViewBag.maxSize) / 15; i++)
+    {
+        <li><a href="javascript:showPage('@(i+1)')">@(page++)</a></li>
+    }
+    <li><a href="#">»</a></li>
+</ul>

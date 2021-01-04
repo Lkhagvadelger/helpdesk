@@ -1,0 +1,185 @@
+﻿@model helpDesk.Entity.Complain
+
+@{
+    ViewBag.Title = "Хүсэлтийн дэлгэрэнгүй";
+}
+<h2>Дэлгэрэнгүй</h2>
+<div>
+    <h4>Хүсэлт</h4>
+    <hr />
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                Дугаар
+            </td>
+            <td>
+                @Model.id
+            </td>
+        <tr>
+            <td>
+                Байгууллага
+            </td>
+            <td>
+                @Model.Organisation.org_name
+            </td>
+        <tr>
+            <td>
+                Огноо
+            </td>
+            <td>
+                @Model.complain_date
+            </td>
+        <tr>
+            <td>
+                Оруулсан
+            </td>
+            <td>
+                @Model.AspNetUser.UserName
+            </td>
+        <tr>
+            <td>
+                Систем
+            </td>
+            <td>
+                @Model.SystemModule.SystemModule2.name
+            </td>
+        <tr>
+            <td>
+                Модуль
+            </td>
+            <td>
+                @Model.SystemModule.name
+            </td>
+        <tr>
+            <td>
+                Төрөл
+            </td>
+            <td>
+                @Model.ComplainType.complainType1
+            </td>
+        <tr>
+            <td>
+                Тайлбар
+            </td>
+            <td>
+                @Model.complain_text
+            </td>
+        <tr>
+            <td>
+                Төлөв
+            </td>
+            <td>
+                @if (Model.status_id == 1)
+                {<span class="label label-warning">Хүсэлт илгээгдсэн</span>
+                }
+                @if (Model.status_id == 2)
+                { <span class="label label-primary">Хүсэлт шалгагдаж байна</span>
+                }
+                @if (Model.status_id == 3)
+                {<span class="label label-success">Хүсэлт шийдвэрлэгдсэн</span>
+                }
+                @if (Model.status_id == 4)
+                {<span class="label label-info">Хүсэлт буцаагдсан</span>
+                }
+                @if (Model.status_id == 5)
+                {
+                    <span class="label label-default">Баталгаажуулагдаагүй</span>
+                    if (User.IsInRole("Subadmin"))
+                    {
+                        <a href="javascriptL:void()" style="float:right" data-toggle="modal" data-target="#statusModal">Баталгаажуулах</a>
+                    }
+                }
+                @if (Model.status_id == 3 || Model.status_id != 5)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        <a href="javascriptL:void()" style="float:right" data-toggle="modal" data-target="#replayModal">Хүсэлтэнд хариулах</a>
+                    }
+                }
+            </td>
+        <tr>
+            <td>
+                Хавсралт
+            </td>
+            <td>
+                @if (Model.document_name != null)
+                {
+                    <a href="@("/Content/file/"+@Model.document_url)">Харах</a>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>Хариулт тайлбар</td>
+            <td>@Model.replay</td>
+    </tr>
+</table>
+</div>
+<div>@Html.Action("DetailsStatus", new { id = Model.id })</div>
+<div>
+
+    <p>
+        @if (Model.status_id == 5)
+        {
+            @Html.ActionLink("Засах", "Edit", new { id = Model.id }) <span>|</span>
+        }
+        @Html.ActionLink("Жагсаалтруу буцах", "Index")
+    </p>
+</div>
+@if (Model.status_id == 5 && User.IsInRole("Subadmin"))
+{
+    <div class="modal fade" id="statusModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Төлөв солих</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Баталгаажуулахын тулд батлах гэсэн товчийг дарна уу.</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="/Complain/Confirm" method="post">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Гарах</button>
+                        <input type="hidden" value="@(Model.user_id+"_"+Model.id)" name="value" />
+                        <button type="submit" class="btn btn-success  btn-sm">Батлах</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (Model.status_id != 5 && User.IsInRole("Admin"))
+{
+    <div class="modal fade" id="replayModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/Complain/Replay" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Төлөв солих</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <input type="hidden" value="@Model.id" name="id" />
+                                    @Html.DropDownList("statusList", null, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <textarea name="replay" class="form-control col-lg-pull-12" style="height:200px;"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer small">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Гарах</button>
+                        <input type="hidden" value="@(Model.user_id+"_"+Model.id)" name="value" />
+                        <button type="submit" class="btn btn-success  btn-sm">Хариулт өгөх</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}

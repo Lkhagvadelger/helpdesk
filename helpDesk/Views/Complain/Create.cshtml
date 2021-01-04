@@ -1,0 +1,95 @@
+﻿@model helpDesk.Entity.Complain
+
+@{
+    ViewBag.Title = "Хүсэлт оруулах";
+}
+
+<h2>Хүсэлт оруулах</h2>
+@if (User.IsInRole("Subadmin") || User.IsInRole("Moderator") || User.IsInRole("Superadmin") || User.IsInRole("Admin"))
+{
+    using (Html.BeginForm("Create", "Complain", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                @Html.LabelFor(model => model.complain_date, "Огноо", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBox("complain_date", DateTime.Now, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.complain_date)
+                </div>
+            </div>
+            <div class="form-group">
+                @if (helpDesk.Controllers.OrganisationController.OrganisationServiceType(User.Identity.Name) == "Үйлчилгээ")
+                {
+                    @Html.LabelFor(model => model.system_id, "Үйлчилгээ", new { @class = "control-label col-md-2" })
+                }
+                else
+                {
+                    @Html.LabelFor(model => model.system_id, "Систем", new { @class = "control-label col-md-2" })
+                }
+                <div class="col-md-10">
+                    @Html.DropDownList("system_id", null, "- Систем сонгоно уу -", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.system_id)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.system_id, "Модул", new { @class = "control-label col-md-2" })
+                <div class="col-md-10" id="module_container">
+                    <select id="module_id" name="module_id" class="form-control"><option>- Модуль сонгоно уу -</option></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.complain_type_id, "Хүсэлтийн төрөл", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("complain_type_id", null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.complain_type_id)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.complain_text, "Хүсэлт", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextArea("complain_text", null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.complain_type_id)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Файл хавсаргах", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="file" id="file" class="form-control" /><label>30mb-с доош зураг, pdf, doc, docx өргөтгөлтэй файлыг хавсаргаж болно.</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Оруулах" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    <script type="text/javascript">
+        $("#system_id").on('change', function () {
+            $.ajax({
+                type: "POST",
+                url: "/Complain/ModuleList",
+                cache: false,
+                data: { id: $(this).val() },
+                success: function (result) {
+                    $("#module_container").html(result);
+                }
+            });
+        });
+    </script>
+}
+else
+{
+    <span class="label label-warning"> Хүсэлт оруулах эрх байхгүй байна</span>
+}
+<div>
+    @Html.ActionLink("Жагсаалтруу буцах", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

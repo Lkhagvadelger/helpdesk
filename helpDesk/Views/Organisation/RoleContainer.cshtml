@@ -1,0 +1,14 @@
+﻿<table class="table table-hover" style="width:100%">
+    <tr>
+        <td style="width:50%;">@Html.DropDownList("roles", null, new { @class = "form-control" })</td>
+        <td style="width:50%;">@Html.Raw(ViewBag.userRoles)</td>
+    </tr>
+    <tr>
+        <td><button type="button" class="btn btn-sm btn-success" onclick="RoleAdd('@ViewBag.userid')">Эрх нэмэх</button></td>
+        <td><button type="button" class="btn btn-sm btn-warning" onclick="RoleRemove('@ViewBag.userid')">Эрх хасах</button></td>
+    </tr>
+    <tr>
+        <td>Нэвтрэх нэр: @ViewBag.username</td>
+        <td>Одоо байгаа эрхүүд: @Html.Action("ShowRoles", new { userid = ViewBag.userid })</td>
+    </tr>
+</table>

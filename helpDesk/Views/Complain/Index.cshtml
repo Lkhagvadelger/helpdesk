@@ -1,0 +1,57 @@
+﻿<h2 style="float:left">Хүсэлтийн жагсаалт</h2>
+<br />
+<input style="float:right" type="text" id="search-value" onkeyup="SearchBoxAdd($(this).val())" class="form-control input-sm" placeholder="Хайх үгээ бичээд хай" />
+
+<br />
+<br />
+<div id="complain-list">
+    @Html.Action("ComplainList")
+</div>
+<div>
+    <span class="label label-default">Баталгаажуулагдаагүй</span>
+    <span class="label label-primary">Хүсэлт шалгагдаж байна</span>
+    <span class="label label-warning">Хүсэлт илгээгдсэн</span>
+    <span class="label label-success">Хүсэлт шийдвэрлэгдсэн</span>
+    <span class="label label-info">Хүсэлт буцаагдсан</span>
+</div>
+<script type="text/javascript">
+    function SearchBoxAdd(sval) {
+        if (sval !== "") {
+            $("#followingBallsG").show();
+            $.ajax({
+                type: "POST",
+                url: "/Complain/ComplainList",
+                cache: false,
+                data: { value: sval },
+                success: function (result) {
+                    $("#complain-list").html(result);
+                    $("#followingBallsG").hide();
+                }
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/Complain/ComplainList",
+                cache: false,
+                success: function (result) {
+                    $("#followingBallsG").hide();
+                    $("#complain-list").html(result);
+                }
+            });
+        }
+    }
+    function showPage(num)
+    {
+       var value = $("#search-value").val();
+       $.ajax({
+           type: "POST",
+           url: "/Complain/ComplainList",
+           cache: false,
+           data: { value: value, page :num },
+           success: function (result) {
+               $("#followingBallsG").hide();
+               $("#complain-list").html(result);
+           }
+       });
+    }
+</script>

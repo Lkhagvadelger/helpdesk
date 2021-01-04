@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="663ec331459246288220d03b2e7b4328" Name="Diagram1" ZoomLevel="42">
+        <EntityTypeShape EntityType="helpDescModel.C__MigrationHistory" Width="1.5" PointX="5.4702183089546015" PointY="13.8373390351596" />
+        <EntityTypeShape EntityType="helpDescModel.AspNetRole" Width="1.5" PointX="11.975607225660053" PointY="20.457585642327363" />
+        <EntityTypeShape EntityType="helpDescModel.AspNetUserClaim" Width="1.5" PointX="11.810330998064174" PointY="23.643586184663505" />
+        <EntityTypeShape EntityType="helpDescModel.AspNetUserLogin" Width="1.5" PointX="1.0447807503141373" PointY="14.962977654749052" />
+        <EntityTypeShape EntityType="helpDescModel.AspNetUser" Width="1.5" PointX="2.8544537568718447" PointY="12.242299487927136" />
+        <EntityTypeShape EntityType="helpDescModel.Complain" Width="1.5" PointX="0.66026094772865107" PointY="7.3471958075404151" />
+        <EntityTypeShape EntityType="helpDescModel.ComplainStatu" Width="1.5" PointX="0.048229711152720137" PointY="17.866365441058932" />
+        <EntityTypeShape EntityType="helpDescModel.ComplainType" Width="1.5" PointX="1.9815839296121074" PointY="25.036394563054849" />
+        <EntityTypeShape EntityType="helpDescModel.Organisation" Width="1.5" PointX="9.78051187553467" PointY="26.446590540207268" />
+        <EntityTypeShape EntityType="helpDescModel.QA" Width="1.5" PointX="9.5324971273227117" PointY="6.6582393826256689" />
+        <EntityTypeShape EntityType="helpDescModel.Status" Width="1.5" PointX="7.33201438716241" PointY="10.640408669896614" />
+        <EntityTypeShape EntityType="helpDescModel.SystemModule" Width="1.5" PointX="2.2093231502032484" PointY="22.887206043529886" />
+        <AssociationConnector Association="helpDescModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" />
+        <AssociationConnector Association="helpDescModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="helpDescModel.FK_Complain_AspNetUsers" />
+        <AssociationConnector Association="helpDescModel.FK_QA_AspNetUsers" />
+        <AssociationConnector Association="helpDescModel.FK_QA_QA" />
+        <AssociationConnector Association="helpDescModel.FK_CompainStatus_Complain" />
+        <AssociationConnector Association="helpDescModel.FK_Complain_ComplainType" />
+        <AssociationConnector Association="helpDescModel.FK_Complain_Organisation" />
+        <AssociationConnector Association="helpDescModel.FK_Complain_Status" />
+        <AssociationConnector Association="helpDescModel.FK_Complain_SystemModule" />
+        <AssociationConnector Association="helpDescModel.FK_CompainStatus_Status" />
+        <AssociationConnector Association="helpDescModel.FK_QA_Organisation" />
+        <AssociationConnector Association="helpDescModel.FK_SystemModule_Organisation" />
+        <AssociationConnector Association="helpDescModel.FK_SystemModule_SystemModule" />
+        <AssociationConnector Association="helpDescModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

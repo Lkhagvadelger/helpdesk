@@ -1,0 +1,40 @@
+﻿@{
+    List<helpDesk.Entity.Organisation> orglist = ViewBag.orgList as List<helpDesk.Entity.Organisation>;
+    List<helpDesk.Entity.ComplainType> comType = ViewBag.comType as List<helpDesk.Entity.ComplainType>;
+    ViewBag.Title = "Тайлан, үзүүлэлтүүд";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.globalize/globalize.js"></script>
+<script src="~/Scripts/dx.chartjs.js"></script>
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+<h2>Тайлан, үзүүлэлтүүд</h2>
+<div class="row">
+@Html.DropDownList("organisation_id", null, null, new { @class = "form-control" })
+</div>
+<br/>
+<div class="row" id="organisation-detail">
+
+</div>
+<div id="reportDiv">
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#organisation_id").change(function () {
+            $("#followingBallsG").show();
+            var id = $("#organisation_id").val();
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "/Report/OrganisationDetail",
+                data: { "org_id": id },
+                success: function (result) {
+                    $("#organisation-detail").html('');
+                    $("#organisation-detail").html(result);
+                    $("#followingBallsG").hide();
+                }
+            });
+        });
+    });
+</script>

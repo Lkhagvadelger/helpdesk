@@ -1,0 +1,94 @@
+﻿@model helpDesk.Entity.SystemModule
+
+@{
+    ViewBag.Title = "Үүсгэх";
+}
+
+<h2>Систем, модуль, үндсэн үйлчилгээ, дэд үйлчилгээ</h2>
+
+@using (Html.BeginForm("SystemAdd", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.is_module, "Модуль эсэх", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="is_module" id="is_module" class="form-control">
+                    <option value="false">Систем/Үндсэн үйлчилгээ</option>
+                    <option value="true">Модуль/Дэд үйлчилгээ</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.is_module)
+            </div>
+        </div>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.organisation_id, "Байгууллага", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("organisation_id", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.organisation_id)
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none" id="main-sytem">
+            @Html.LabelFor(model => model.parent_id, "Систем/ Үндсэн үйлчилгээ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div id="module_container">
+                    @Html.DropDownList("parent_id", null, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.parent_id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, "Нэр", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.is_enabled, "Төлөв",new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="is_enabled" id="is_enabled" class="form-control">
+                    <option value="true">Идэвхтэй</option>
+                    <option value="false">Идэвхгүй</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.is_enabled)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Үүсгэх" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Жагсаалтруу буцах", "System")
+</div>
+<script type="text/javascript">
+    $("#is_module").on('change', function () {
+        if ($(this).val() ==="true") {
+            $("#main-sytem").show();
+        } else {
+            $("#main-sytem").hide();
+        }
+    });
+    $("#organisation_id").on('change', function () {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/OrganisationSystemList",
+            cache: false,
+            data: { id: $(this).val() },
+            success: function (result) {
+                $("#module_container").html(result);
+            }
+        });
+    });
+</script>
